@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/constants/colors.dart';
+import 'package:travel_app/widgets/carousel/image_carousel.dart';
+import 'package:travel_app/widgets/misc/circle_tab_indicator.dart';
 import 'package:travel_app/widgets/typography/heading.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  List placeList = [
+    // todo: add pictures
+    'mountain.jpeg',
+    'mountain.jpeg',
+    'mountain.jpeg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     TabController _tabController = TabController(length: 3, vsync: this);
@@ -76,16 +85,15 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 300,
                   width: double.maxFinite,
-                  padding: const EdgeInsets.all(20),
                   child: TabBarView(
                     controller: _tabController,
-                    children: const [
-                      Text('Hey'),
-                      Text('Hey There'),
-                      Text('Hey Again'),
+                    children: [
+                      ImageCarousel(list: placeList),
+                      const Center(child: Text('Inspiration carousel')),
+                      const Center(child: Text('Emotions carousel')),
                     ],
                   ),
                 )
@@ -95,41 +103,5 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-}
-
-class CircleTabIndicator extends Decoration {
-  final Color color;
-  final double radius;
-
-  const CircleTabIndicator({required this.color, required this.radius});
-
-  @override
-  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    return _CircleTabIndicatorPainter(
-      color: color,
-      radius: radius,
-    );
-  }
-}
-
-class _CircleTabIndicatorPainter extends BoxPainter {
-  final Color color;
-  final double radius;
-
-  _CircleTabIndicatorPainter({required this.color, required this.radius});
-
-  @override
-  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
-    Paint _paint = Paint();
-    _paint.color = color;
-    _paint.isAntiAlias = true;
-
-    final Offset circleOffset = Offset(
-      configuration.size!.width / 2 - radius / 2,
-      configuration.size!.height - radius - 4,
-    );
-
-    canvas.drawCircle(offset + circleOffset, radius, _paint);
   }
 }
