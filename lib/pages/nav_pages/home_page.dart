@@ -3,6 +3,7 @@ import 'package:travel_app/constants/colors.dart';
 import 'package:travel_app/widgets/carousel/image_carousel.dart';
 import 'package:travel_app/widgets/misc/circle_tab_indicator.dart';
 import 'package:travel_app/widgets/typography/heading.dart';
+import 'package:travel_app/widgets/typography/text.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -96,7 +97,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       const Center(child: Text('Emotions carousel')),
                     ],
                   ),
-                )
+                ),
+                Container(
+                  margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      HeadingBoldText(text: 'Explore more', size: 22,),
+                      AppText(text: 'See all', color: AppColors.mainColor,),
+                    ],
+                  ),
+                ),
               ],
             ),
           ],
