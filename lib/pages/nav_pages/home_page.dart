@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/constants/colors.dart';
+import 'package:travel_app/widgets/typography/heading.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -7,11 +9,93 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home'),
+    TabController _tabController = TabController(length: 3, vsync: this);
+    return Center(
+      child: Scaffold(
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Header icon + profile photo
+            Container(
+              padding: const EdgeInsets.only(
+                top: 70,
+                left: 20,
+                right: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Icon(
+                    Icons.menu,
+                    size: 30,
+                    color: Colors.black54,
+                  ),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            // "Discover" heading
+            Container(
+              margin: const EdgeInsets.only(
+                top: 40,
+                bottom: 30,
+                left: 20,
+              ),
+              child: HeadingBoldText(text: 'Discover'),
+            ),
+            // Tabs
+            Column(
+              children: [
+                // Tab bar
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TabBar(
+                    controller: _tabController,
+                    labelColor: Colors.black,
+                    unselectedLabelColor: Colors.grey,
+                    isScrollable: true,
+                    labelPadding: const EdgeInsets.only(left: 20, right: 20),
+                    tabs: const [
+                      Tab(
+                        text: 'Places',
+                      ),
+                      Tab(
+                        text: 'Inspiration',
+                      ),
+                      Tab(
+                        text: 'Emotions',
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 300,
+                  width: double.maxFinite,
+                  padding: const EdgeInsets.all(20),
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: const [
+                      Text('Hey'),
+                      Text('Hey There'),
+                      Text('Hey Again'),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
