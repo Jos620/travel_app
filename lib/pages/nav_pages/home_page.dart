@@ -70,15 +70,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       radius: 3,
                     ),
                     tabs: const [
-                      Tab(
-                        text: 'Places',
-                      ),
-                      Tab(
-                        text: 'Inspiration',
-                      ),
-                      Tab(
-                        text: 'Emotions',
-                      ),
+                      Tab(text: 'Places'),
+                      Tab(text: 'Inspiration'),
+                      Tab(text: 'Emotions'),
                     ],
                   ),
                 ),
